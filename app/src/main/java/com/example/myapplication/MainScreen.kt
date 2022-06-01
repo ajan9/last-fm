@@ -35,7 +35,7 @@ class MainScreen : Fragment() {
         val tracks = view.findViewById<Button>(R.id.tracks)
 
 
-        search.setOnClickListener{
+        /*search.setOnClickListener{
             findNavController().navigate(R.id.action_mainScreen_to_search)
         }
 
@@ -45,7 +45,7 @@ class MainScreen : Fragment() {
 
         tracks.setOnClickListener{
             findNavController().navigate(R.id.action_mainScreen_to_topTracks)
-        }
+        }*/
 
 
     }
