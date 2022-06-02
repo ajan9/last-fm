@@ -32,11 +32,6 @@
         android:name="com.example.myapplication.ArtistDetail"
         android:label="fragment_artist_detail"
         tools:layout="@layout/fragment_artist_detail" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.myapplication.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/mainScreen"
         android:name="com.example.myapplication.MainScreen"

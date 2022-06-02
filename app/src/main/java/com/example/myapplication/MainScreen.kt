@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 
 
@@ -34,23 +33,18 @@ class MainScreen : Fragment() {
         val artists = view.findViewById<Button>(R.id.artists)
         val tracks = view.findViewById<Button>(R.id.tracks)
 
-
-        /*search.setOnClickListener{
-            findNavController().navigate(R.id.action_mainScreen_to_search)
+        search.setOnClickListener{
+            findNavController().navigate(MainScreenDirections.actionMainScreenToSearch())
         }
 
         artists.setOnClickListener{
-            findNavController().navigate(R.id.action_mainScreen_to_topArtists)
+            findNavController().navigate(MainScreenDirections.actionMainScreenToTopArtists())
         }
 
         tracks.setOnClickListener{
-            findNavController().navigate(R.id.action_mainScreen_to_topTracks)
-        }*/
-
+            findNavController().navigate(MainScreenDirections.actionMainScreenToTopTracks())
+        }
 
     }
-
-
-
-
 }
+
