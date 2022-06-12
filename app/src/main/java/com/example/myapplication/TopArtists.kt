@@ -34,8 +34,8 @@ class TopArtists : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var artists: MutableList<Artist> = mutableListOf()
-        var artistAdapter: ArtistAdapter = ArtistAdapter(artists)
+        var artist: MutableList<Artist> = mutableListOf()
+        var artistAdapter: ArtistAdapter = ArtistAdapter(artist)
 
         recyclerView = view.findViewById(R.id.recycleView)
         recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -48,9 +48,9 @@ class TopArtists : Fragment() {
                     call: retrofit2.Call<TopArtistsResponse>,
                     response: retrofit2.Response<TopArtistsResponse>
                 ) {
-                    if (response.isSuccessful) {
-                        val topArtistResponse = (response.body()!!)
-                        artists.addAll(topArtistResponse.topartists.artists)
+                    if (response.body() != null) {
+                        val topArtistResponse = (response.body())!!
+                        artist.addAll(topArtistResponse.topartists.artists)
                         artistAdapter.notifyDataSetChanged()
                     }
                 }

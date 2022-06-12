@@ -10,14 +10,14 @@ interface ApiInterface {
 
     @GET("/2.0")
     fun getTopArtists(
-        @Query("method") method:String="chart.getTopArtists",
+        @Query("method") method:String="chart.gettopartists",
         @Query("api_key") apiKey:String="3e5276651fae7512493e4cb28d830fbb",
         @Query("format") format:String="json"
     ): Call<TopArtistsResponse>
 
     @GET("/2.0")
     fun getTopTracks(
-        @Query("method") method:String="chart.getTopTracks",
+        @Query("method") method:String="chart.gettoptracks",
         @Query("api_key") apiKey:String="3e5276651fae7512493e4cb28d830fbb",
         @Query("format") format:String="json"
     ): Call<TopTrackResponse>
