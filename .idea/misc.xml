@@ -3,13 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_baseline_audiotrack_24.xml" value="0.182" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_baseline_people_alt_24.xml" value="0.182" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/logo_background.xml" value="0.2645" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/font/fonts.xml" value="0.28854166666666664" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.2453125" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/artist_card.xml" value="0.264" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_artist_detail.xml" value="0.259375" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_main_screen.xml" value="0.259375" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_search.xml" value="0.259375" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_splash_screen.xml" value="0.259375" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_top_artists.xml" value="0.259375" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_top_tracks.xml" value="0.259375" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/splash.xml" value="0.146875" />
+        <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/layout/track_card.xml" value="0.259375" />
         <entry key="..\:/Users/Andrea/AndroidStudioProjects/MyApplication/app/src/main/res/menu/bottom_nav.xml" value="0.2453125" />
       </map>
     </option>
