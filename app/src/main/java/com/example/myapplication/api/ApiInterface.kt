@@ -22,4 +22,12 @@ interface ApiInterface {
         @Query("format") format:String="json"
     ): Call<TopTrackResponse>
 
+    @GET("/2.0")
+    fun getSearch(
+        @Query("artist") artist:String,
+        @Query("method") method:String="artist.search",
+        @Query("api_key") apiKey:String="3e5276651fae7512493e4cb28d830fbb",
+        @Query("format") format:String="json"
+    ): Call<TopArtistsResponse>
+
 }

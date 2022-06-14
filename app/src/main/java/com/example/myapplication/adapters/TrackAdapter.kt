@@ -38,9 +38,9 @@ class TrackAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val track=list[position]
         val i = track.image.size
-        viewHolder.name.text=track.name
+        viewHolder.name.text= track.name
         viewHolder.artist.text=track.artist.name
-        viewHolder.listeners.text=track.listeners
+        viewHolder.listeners.text= track.listeners
         viewHolder.playCount.text=track.playcount
         Glide.with(viewHolder.image.context).load(track.image[i-1].text).into(viewHolder.image)
 
