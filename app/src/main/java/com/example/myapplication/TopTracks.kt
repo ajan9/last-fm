@@ -62,5 +62,6 @@ class TopTracks : Fragment() {
                 }
             },
         )
+
     }
 }

@@ -5,37 +5,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.MainScreenDirections
 import com.example.myapplication.R
-import com.example.myapplication.models.Artist
-import androidx.navigation.fragment.findNavController
-import com.example.myapplication.TopArtists
+import com.example.myapplication.SearchDirections
 import com.example.myapplication.TopArtistsDirections
-import de.hdodenhof.circleimageview.CircleImageView
+import com.example.myapplication.models.Artist
 
-class ArtistAdapter(
+class SearchAdapter(
     val list: MutableList<Artist>
-): RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+): RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView
-        val listeners: TextView
-        val playCount: TextView
-        val image: CircleImageView
-        var card : CardView
+        val image: ImageView
 
         init {
             name = view.findViewById(R.id.name)
-            listeners = view.findViewById(R.id.listeners)
-            playCount = view.findViewById(R.id.playcount)
             image = view.findViewById(R.id.image)
-            card = view.findViewById(R.id.card)
         }
     }
 
@@ -49,13 +37,11 @@ class ArtistAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val artist=list[position]
         viewHolder.name.text = artist.name
-        viewHolder.listeners.text = artist.listeners
-        viewHolder.playCount.text = artist.playcount
         val i = artist.image.size
         Glide.with(viewHolder.image.context).load(artist.image[i-1].text).into(viewHolder.image)
 
         viewHolder.itemView.setOnClickListener{ view ->
-            view.findNavController().navigate(TopArtistsDirections.actionTopArtistsToArtistDetail(artist.name))
+            view.findNavController().navigate(SearchDirections.actionSearchToArtistDetail(artist.name))
         }
     }
 

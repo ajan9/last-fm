@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,17 +51,19 @@ class TopArtists : Fragment() {
                     response: retrofit2.Response<TopArtistsResponse>
                 ) {
                     if (response.body() != null) {
-                        val topArtistResponse = (response.body())!!
-                        artist.addAll(topArtistResponse.topartists.artists)
+                        val topArtistsResponse = (response.body()!!)
+                        artist.addAll(topArtistsResponse.artists.artist)
                         artistAdapter.notifyDataSetChanged()
                     }
                 }
 
                 override fun onFailure(call: Call<TopArtistsResponse>, t: Throwable) {
-                    Toast.makeText(context, "Failed $t", Toast.LENGTH_LONG).show()
+                    Log.d("MSG: ", t.toString())
                 }
 
             },
         )
     }
+
+
 }

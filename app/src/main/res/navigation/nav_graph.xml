@@ -31,7 +31,11 @@
         android:id="@+id/artistDetail"
         android:name="com.example.myapplication.ArtistDetail"
         android:label="fragment_artist_detail"
-        tools:layout="@layout/fragment_artist_detail" />
+        tools:layout="@layout/fragment_artist_detail" >
+        <argument
+            android:name="artist_name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/mainScreen"
         android:name="com.example.myapplication.MainScreen"
