@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.SearchDirections
-import com.example.myapplication.TopArtistsDirections
 import com.example.myapplication.models.Artist
 
 class SearchAdapter(

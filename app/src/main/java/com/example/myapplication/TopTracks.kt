@@ -1,26 +1,35 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.adapters.ArtistAdapter
 import com.example.myapplication.adapters.TrackAdapter
 import com.example.myapplication.api.RetrofitInstance
-import com.example.myapplication.models.Artist
-import com.example.myapplication.models.TopArtistsResponse
+import com.example.myapplication.databinding.FragmentTopTracksBinding
 import com.example.myapplication.models.TopTrackResponse
 import com.example.myapplication.models.Track
+import com.example.myapplication.network.RetrofitApiCall
+import com.example.myapplication.viewmodel.TopTracksViewModel
 import retrofit2.Call
 
 
 class TopTracks : Fragment() {
 
+    private var _binding: FragmentTopTracksBinding? = null
     private var recyclerView: RecyclerView? = null
+    private lateinit var model : RetrofitApiCall
+    private lateinit var topTracksViewModel: TopTracksViewModel
+    private lateinit var trackAdapter: TrackAdapter
+    private val binding get() = _binding!!
+    var tracks: MutableList<Track> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,37 +40,43 @@ class TopTracks : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_tracks, container, false)
+        _binding = FragmentTopTracksBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var tracks: MutableList<Track> = mutableListOf()
-        var trackAdapter: TrackAdapter = TrackAdapter(tracks)
+        trackAdapter = TrackAdapter(tracks)
 
-        recyclerView = view.findViewById(R.id.recycleView)
+        recyclerView = binding.recycleView
         recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = trackAdapter
 
-        val response = RetrofitInstance.api.getTopTracks()
-        response.enqueue(
-            object : retrofit2.Callback<TopTrackResponse> {
-                override fun onResponse(
-                    call: retrofit2.Call<TopTrackResponse>,
-                    response: retrofit2.Response<TopTrackResponse>
-                ) {
-                    if (response.body() != null) {
-                        val topTrackResponse = (response.body())!!
-                        tracks.addAll(topTrackResponse.tracks.track)
-                        trackAdapter.notifyDataSetChanged()
-                    }
-                }
-                override fun onFailure(call: Call<TopTrackResponse>, t: Throwable) {
-                    Toast.makeText(context, "Failed $t", Toast.LENGTH_LONG).show()
-                }
-            },
-        )
+        topTracksViewModel = ViewModelProvider(this)[TopTracksViewModel::class.java]
+        model = RetrofitApiCall()
+        topTracksViewModel.getTopTracksList(model)
 
+        setLiveDataListeners()
+
+        Log.d("andreaa", "1")
+
+    }
+
+    private fun setLiveDataListeners() {
+        Log.d("andreaa", "2")
+        topTracksViewModel.topTracksLiveData.observe(viewLifecycleOwner, Observer { tracks
+            Log.d("andreaa", "3")
+            trackAdapter.notifyDataSetChanged()
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.adapters.ArtistDetailAdapter
 import com.example.myapplication.api.RetrofitInstance
-import com.example.myapplication.models.*
+import com.example.myapplication.models.ArtistInfo
+import com.example.myapplication.models.ArtistTracksResponse
+import com.example.myapplication.models.InfoResponse
+import com.example.myapplication.models.Track
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 

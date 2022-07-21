@@ -3,19 +3,13 @@ package com.example.myapplication.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.MainScreenDirections
 import com.example.myapplication.R
 import com.example.myapplication.models.Artist
-import androidx.navigation.fragment.findNavController
-import com.example.myapplication.TopArtists
 import com.example.myapplication.TopArtistsDirections
 import de.hdodenhof.circleimageview.CircleImageView
 

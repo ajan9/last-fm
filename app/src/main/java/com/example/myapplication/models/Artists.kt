@@ -1,6 +1,6 @@
 package com.example.myapplication.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.myapplication.models.Artist
 
 data class Artists (
     val artist: List<Artist>
