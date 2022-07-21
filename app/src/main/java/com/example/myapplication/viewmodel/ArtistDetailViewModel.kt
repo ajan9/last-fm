@@ -16,26 +16,30 @@ class ArtistDetailViewModel(application: Application) : AndroidViewModel(applica
     private var sharedPreferences = application.getSharedPreferences("MyPref", Context.MODE_PRIVATE)!!
 
     fun getArtistTopTracksList(model: ApiModel){
-        val artist = sharedPreferences.getLong("artist", 0)
-        model.getArtistTopTracks(artist.toString(), object: RequestCompleteListener<ArtistTracksResponse> {
-            override fun onRequestSuccess(tracks: ArtistTracksResponse) {
-                tracksList.postValue(tracks.toptracks.track)
-            }
-            override fun onRequestFailed(errorMessage: String) {
-                Log.d("error", "retrofit failed")
-            }
-        })
+        val artist = sharedPreferences.getString("artist", "")
+        if (artist != null) {
+            model.getArtistTopTracks(artist, object: RequestCompleteListener<ArtistTracksResponse> {
+                override fun onRequestSuccess(tracks: ArtistTracksResponse) {
+                    tracksList.postValue(tracks.toptracks.track)
+                }
+                override fun onRequestFailed(errorMessage: String) {
+                    Log.d("error", "retrofit failed")
+                }
+            })
+        }
     }
 
     fun getInfoList(model: ApiModel){
-        val artist = sharedPreferences.getLong("artist", 0)
-        model.getInfo(artist.toString(), object: RequestCompleteListener<InfoResponse> {
-            override fun onRequestSuccess(infoRes: InfoResponse) {
-                info.postValue(infoRes.artist)
-            }
-            override fun onRequestFailed(errorMessage: String) {
-                Log.d("error", "retrofit failed")
-            }
-        })
+        val artist = sharedPreferences.getString("artist", "")
+        if (artist != null) {
+            model.getInfo(artist, object: RequestCompleteListener<InfoResponse> {
+                override fun onRequestSuccess(infoRes: InfoResponse) {
+                    info.postValue(infoRes.artist)
+                }
+                override fun onRequestFailed(errorMessage: String) {
+                    Log.d("error", "retrofit failed")
+                }
+            })
+        }
     }
 }

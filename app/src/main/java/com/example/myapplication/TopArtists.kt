@@ -1,27 +1,40 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapters.ArtistAdapter
-import com.example.myapplication.api.RetrofitInstance
+import com.example.myapplication.databinding.FragmentTopArtistsBinding
+import com.example.myapplication.databinding.FragmentTopTracksBinding
 import com.example.myapplication.models.Artist
 import com.example.myapplication.models.TopArtistsResponse
+import com.example.myapplication.models.Track
+import com.example.myapplication.network.RetrofitApiCall
+import com.example.myapplication.viewmodel.TopArtistViewModel
+import com.example.myapplication.viewmodel.TopTracksViewModel
 import retrofit2.Call
 
 
 class TopArtists : Fragment() {
 
+    private var _binding: FragmentTopArtistsBinding? = null
     private var recyclerView: RecyclerView? = null
+    private lateinit var model : RetrofitApiCall
+    private lateinit var topArtistViewModel: TopArtistViewModel
+    private lateinit var artistAdapter: ArtistAdapter
+    private val binding get() = _binding!!
+    var artists: MutableList<Artist> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -29,40 +42,39 @@ class TopArtists : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_artists, container, false)
+        _binding = FragmentTopArtistsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var artist: MutableList<Artist> = mutableListOf()
-        var artistAdapter: ArtistAdapter = ArtistAdapter(artist)
+        artistAdapter = ArtistAdapter(artists)
 
-        recyclerView = view.findViewById(R.id.recycleView)
+        recyclerView = binding.recycleView
         recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = artistAdapter
 
-        val response = RetrofitInstance.api.getTopArtists()
-        response.enqueue(
-            object : retrofit2.Callback<TopArtistsResponse> {
-                override fun onResponse(
-                    call: retrofit2.Call<TopArtistsResponse>,
-                    response: retrofit2.Response<TopArtistsResponse>
-                ) {
-                    if (response.body() != null) {
-                        val topArtistsResponse = (response.body()!!)
-                        artist.addAll(topArtistsResponse.artists.artist)
-                        artistAdapter.notifyDataSetChanged()
-                    }
-                }
+        topArtistViewModel = ViewModelProvider(this)[TopArtistViewModel::class.java]
+        model = RetrofitApiCall()
+        topArtistViewModel.getTopArtistsList(model)
 
-                override fun onFailure(call: Call<TopArtistsResponse>, t: Throwable) {
-                    Log.d("MSG: ", t.toString())
-                }
-
-            },
-        )
+        setLiveDataListeners()
     }
 
+    private fun setLiveDataListeners() {
+        topArtistViewModel.topArtistLiveData.observe(viewLifecycleOwner, Observer { it
+            setAdapterInfo(it)
+        })
+    }
 
+    private fun setAdapterInfo(it: List<Artist>) {
+        artists.addAll(it)
+        artistAdapter.notifyDataSetChanged()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

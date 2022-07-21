@@ -1,5 +1,7 @@
 package com.example.myapplication.adapters
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +16,10 @@ import com.example.myapplication.TopArtistsDirections
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ArtistAdapter(
-    val list: MutableList<Artist>
+    val list: MutableList<Artist>,
 ): RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+
+    lateinit var  sharedPref : SharedPreferences
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView
@@ -23,6 +27,7 @@ class ArtistAdapter(
         val playCount: TextView
         val image: CircleImageView
         var card : CardView
+
 
         init {
             name = view.findViewById(R.id.name)
@@ -36,7 +41,6 @@ class ArtistAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.artist_card, viewGroup, false)
-
         return ViewHolder(view)
     }
 

@@ -17,14 +17,16 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     private var sharedPreferences = application.getSharedPreferences("MyPref", Context.MODE_PRIVATE)!!
 
     fun getSearchArtistList(model: ApiModel){
-        val artist = sharedPreferences.getLong("artist", 0)
-        model.getSearch(artist.toString(), object: RequestCompleteListener<SearchResponse> {
-            override fun onRequestSuccess(artists: SearchResponse) {
-                artistsList.postValue(artists.results.artistmatches.artist)
-            }
-            override fun onRequestFailed(errorMessage: String) {
-                Log.d("error", "retrofit failed")
-            }
-        })
+        val artist = sharedPreferences.getString("artist", "")
+        if (artist != null) {
+            model.getSearch(artist, object: RequestCompleteListener<SearchResponse> {
+                override fun onRequestSuccess(artistsS: SearchResponse) {
+                    artistsList.postValue(artistsS.results.artistmatches.artist)
+                }
+                override fun onRequestFailed(errorMessage: String) {
+                    Log.d("error", "retrofit failed")
+                }
+            })
+        }
     }
 }

@@ -19,7 +19,7 @@
             android:layout_margin="5dp"
             app:iconifiedByDefault="false"
             android:background="@drawable/search"
-            android:queryHint="Search users"
+            android:queryHint="Search artists"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

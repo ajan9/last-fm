@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapters.TrackAdapter
-import com.example.myapplication.api.RetrofitInstance
 import com.example.myapplication.databinding.FragmentTopTracksBinding
 import com.example.myapplication.models.TopTrackResponse
 import com.example.myapplication.models.Track
@@ -58,25 +57,21 @@ class TopTracks : Fragment() {
         topTracksViewModel.getTopTracksList(model)
 
         setLiveDataListeners()
-
-        Log.d("andreaa", "1")
-
     }
 
     private fun setLiveDataListeners() {
-        Log.d("andreaa", "2")
-        topTracksViewModel.topTracksLiveData.observe(viewLifecycleOwner, Observer { tracks
-            Log.d("andreaa", "3")
-            trackAdapter.notifyDataSetChanged()
+        topTracksViewModel.topTracksLiveData.observe(viewLifecycleOwner, Observer { it
+            setAdapterInfo(it)
         })
+    }
+
+    private fun setAdapterInfo(data: List<Track>){
+        tracks.addAll(data)
+        trackAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

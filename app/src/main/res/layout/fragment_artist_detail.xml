@@ -31,20 +31,23 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:text="TextView" />
+                android:fontFamily="@font/cabin"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin"
             android:layout_margin="5dp"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:textColor="@color/dark_red"
             android:text="About:" />
 
@@ -53,8 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:paddingLeft="8dp"
-            android:textSize="11sp"
+            android:paddingLeft="12dp"
+            android:paddingRight="6dp"
+            android:textSize="10sp"
             android:textColor="@color/white"
             android:text="TextView" />
 
@@ -63,8 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:fontFamily="@font/cabin"
             android:textColor="@color/dark_red"
             android:layout_margin="8dp"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:text="Artist Top Tracks" />
 
